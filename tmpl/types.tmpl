@@ -1,0 +1,10 @@
+<?js
+    var data = obj;
+    var self = this;
+    data.forEach(function(name, i) { ?>
+<span class="types <?js= data.length > 1 ? "multitype" : "" ?>">
+<?js var split = name.toLowerCase().split("."); // look for containers
+var safeName = split[1] ? split[0] : name; ?>
+    <span class="type <?js=safeName?>"><?js= self.linkto(name, self.htmlsafe(name)) ?></span>
+<?js if (i < data.length-1) { ?>|<?js } ?>
+<?js }); ?>

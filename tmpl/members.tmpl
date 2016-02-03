@@ -5,13 +5,19 @@ var typeSignature = '';
 
 if (data.type && data.type.names) {
     data.type.names.forEach(function (name) {
-        typeSignature += '<span class="type-signature type ' + name.toLowerCase() + '">' + self.linkto(name, self.htmlsafe(name)) + '</span> ';
+        var split = name.toLowerCase().split("."); // look for containers
+        typeSignature += '<span class="type-signature type ' + name.toLowerCase() + (split.length > 1 ? " " + split[0] + " " : "") +  '">' + self.linkto(name, self.htmlsafe(name)) + '</span> ';
     });
 }
 ?>
 <dt>
-    <div class="nameContainer">
-        <h4 class="name" id="<?js= id ?>"><?js= data.attribs + (data.scope === 'static' ? longname : name)  + typeSignature ?></h4>
+    <div class="nameContainer<?js if (data.inherited) { ?> inherited<?js } ?>">
+        <h4 class="name" id="<?js= id ?>">
+            <?js if (data.inherited || data.inherits) { ?>
+                <span class="inherited"><?js= this.linkto(data.inherits, 'inherited') ?></span>
+            <?js } ?>
+            <?js= data.attribs + (data.scope === 'static' ? longname : name)  + self.partial('types.tmpl', data.type.names) ?>
+        </h4>
     </div>
     
     <?js if (data.summary) { ?>
@@ -19,6 +25,13 @@ if (data.type && data.type.names) {
     <?js } ?>
 </dt>
 <dd>
+    <?js if (data.inherited && data.inherits) { ?>
+        <dt class="inherited-from">Inherited From:</dt>
+        <dd class="inherited-from">
+            <?js= this.linkto(data.inherits, this.htmlsafe(data.inherits)) ?>
+        </dd>
+    <?js } ?>
+
     <?js if (data.description) { ?>
     <div class="description">
         <?js= data.description ?>

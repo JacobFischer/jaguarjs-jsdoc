@@ -23,7 +23,12 @@ var self = this;
     <?js } ?>
 </dt>
 <dd>
-    
+    <?js if (data.inherited && data.inherits) { ?>
+        <dt class="inherited-from">Inherited From:</dt>
+        <dd class="inherited-from">
+            <?js= this.linkto(data.inherits, this.htmlsafe(data.inherits)) ?>
+        </dd>
+    <?js } ?>
     <?js if (data.description) { ?>
     <div class="description">
         <?js= data.description ?>
@@ -84,7 +89,7 @@ var self = this;
     } } ?>
     
     <?js if (data.returns && returns.length) { ?>
-    <h5>Returns:</h5>
+    <?js if (returns.length > 1) { ?><h5>Returns:</h5><?js } ?>
     <?js= self.partial('returns.tmpl', data.returns) ?>
     <?js } ?>
     
