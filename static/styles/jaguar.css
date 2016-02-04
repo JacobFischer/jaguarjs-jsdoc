@@ -135,13 +135,17 @@ li {
 .main span.type {
   display: inline-block;
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-weight: normal;
   border-radius: 3px;
   background-color: gray;
   color: #fff;
   padding: 2px 4px;
 }
 .main h4.name span.type {
-  margin-left: 5px;
+  margin-right: 0.5em;
+}
+.main .returns .type {
+  margin-left: 0.5em;
 }
 .main h4.name span.glyphicon {
   display: inline-block;
@@ -253,11 +257,11 @@ li {
 .main .nameContainer h4 {
   margin-right: 150px;
   line-height: 1.3;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 .main .nameContainer h4 .signature {
   font-size: 16px;
   font-weight: normal;
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 .main pre {
   font-size: 11px;
@@ -349,10 +353,6 @@ footer {
 
 .main .type a:hover {
   color: #ddd;
-}
-
-.main .returns .type {
-  margin-right: 1em;
 }
 
 .main .subsection-title + ul:not([class]) > li:not([class]) {

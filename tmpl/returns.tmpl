@@ -71,10 +71,11 @@ if (returns.length > 1) {
     </tbody>
 </table>
 <?js } else if (returns[0].description) { ?>
-<h5>Returns:</h5>
+<h5>Returns:
 <?js if (returns[0].type && returns[0].type.names) { ?>
 <?js= this.partial('types.tmpl', returns[0].type.names) ?>
 <?js } ?>
+</h5>
 <?js= returns[0].description ?>
 <?js } ?>
 </div>

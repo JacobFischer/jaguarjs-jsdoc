@@ -67,10 +67,6 @@ function addSignatureReturns(f) {
     var returnTypes = helper.getSignatureReturns(f);
     
     f.signature = '<span class="signature">'+(f.signature || '') + '</span>';
-    
-    if (returnTypes.length) {
-        f.signature += '<span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">'+(returnTypes.length ? '{'+returnTypes.join('|')+'}' : '')+'</span>';
-    }
 }
 
 function addSignatureTypes(f) {

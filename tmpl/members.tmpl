@@ -13,10 +13,10 @@ if (data.type && data.type.names) {
 <dt>
     <div class="nameContainer<?js if (data.inherited) { ?> inherited<?js } ?>">
         <h4 class="name" id="<?js= id ?>">
-            <?js if (data.inherited || data.inherits) { ?>
-                <span class="inherited"><?js= this.linkto(data.inherits, 'inherited') ?></span>
+            <?js if (data.type && data.type.names) { ?>
+                <?js= this.partial('types.tmpl', data.type.names) ?>
             <?js } ?>
-            <?js= data.attribs + (data.scope === 'static' ? longname : name)  + self.partial('types.tmpl', data.type.names) ?>
+            <?js= data.attribs + (data.scope === 'static' ? longname : name) ?>
         </h4>
     </div>
     
