@@ -25,7 +25,7 @@
 </header>  
 
 <article>
-    <div class="container-overview">
+    <div class="container-overview" style="<?js= env.conf.templates.meta && env.conf.templates.meta.hideOverview ? 'display: none;' : '' ?>">
     <?js if (doc.kind === 'module' && doc.module) { ?>
         <?js= self.partial('method.tmpl', doc.module) ?>
     <?js } ?>
