@@ -1,0 +1,78 @@
+<?js
+var self = this;
+var nav = obj.items;
+var top = obj.top;
+?>
+<ul class="list <?js= top ? 'top-list' : '' ?>">
+<?js
+nav.forEach(function (navItem) {
+var item = navItem.item;
+?>
+    <li class="item type-<?js= item.type ?>" data-name="<?js= item.longname ?>">
+        <span class="title">
+            <?js= self.linkto(item.longname, env.conf.templates.meta.nestedNamespaces ? item.name : item.longname) ?>
+            <?js if (item.type === 'namespace') { ?>
+            <span class="static"><?js= env.conf.templates.meta.namespaceNameOverride || "static" ?></span>
+            <?js } ?>
+        </span>
+        <ul class="members itemMembers">
+        <?js
+        if (item.members.length) {
+        ?>
+        <span class="subtitle">Members</span>
+        <?js
+            item.members.forEach(function (v) {
+        ?>
+            <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
+        <?js
+            });
+        }
+        ?>
+        </ul>
+        <ul class="typedefs itemMembers">
+        <?js
+        if (item.typedefs.length) {
+        ?>
+        <span class="subtitle">Typedefs</span>
+        <?js
+            item.typedefs.forEach(function (v) {
+        ?>
+            <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
+        <?js
+            });
+        }
+        ?>
+        </ul>
+        <ul class="methods itemMembers">
+        <?js
+        if (item.methods.length) {
+        ?>
+        <span class="subtitle">Methods</span>
+        <?js
+
+            item.methods.forEach(function (v) {
+        ?>
+            <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
+        <?js
+            });
+        }
+        ?>
+        </ul>
+        <ul class="events itemMembers">
+        <?js
+        if (item.events.length) {
+        ?>
+        <span class="subtitle">Events</span>
+        <?js
+            item.events.forEach(function (v) {
+        ?>
+            <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
+        <?js
+            });
+        }
+        ?>
+        </ul>
+        <?js= navItem.children.length > 0 ? self.partial('navigation-items.tmpl', { items: navItem.children }) : '' ?>
+    </li>
+<?js }); ?>
+</ul>

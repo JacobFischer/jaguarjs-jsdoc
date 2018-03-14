@@ -25,7 +25,7 @@ li {
 .navigation {
   position: fixed;
   float: left;
-  width: 250px;
+  width: 320px;
   height: 100%;
   background-color: #1a1a1a;
 }
@@ -68,7 +68,7 @@ li {
   cursor: pointer;
   position: relative;
   display: block;
-  font-size: 0.8em;
+  font-size: 1em;
 }
 .navigation li.item .title a {
   color: #e1e1e1;
@@ -87,12 +87,15 @@ li {
 }
 .navigation li.item .subtitle {
   margin-top: 10px;
-  font: bold 0.65em Helvetica;
+  font: bold 0.875em Helvetica;
   color: #779c34;
   display: block;
 }
+.navigation li.item.current > .title {
+  font-weight: bold;
+}
 .navigation li.item ul > li {
-  font-size: 0.7em;
+  font-size: 0.875em;
   padding-left: 8px;
   margin-top: 2px;
 }
@@ -101,7 +104,7 @@ li {
 }
 .main {
   padding: 20px 20px;
-  margin-left: 250px;
+  margin-left: 320px;
 }
 .main .page-title {
   display: none;

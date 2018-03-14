@@ -26,20 +26,59 @@ $(function () {
 
     // Toggle when click an item element
     $('.navigation').on('click', '.title', function (e) {
-        $(this).parent().find('.itemMembers').toggle();
+        var $parent = $(this).parent();
+
+        if ($parent.hasClass('type-namespace')) {
+            $parent.find('.list').toggle();
+        }
+        else {
+            $parent.find('.itemMembers').toggle();
+        }
     });
 
+    $('.navigation .list:not(.top-list)').toggle();
+
     // Show an item related a current documentation automatically
-    var filename = $('.page-title').data('filename').replace(/\.[a-z]+$/, '');
+    var $pageTitle = $('.page-title');
+    var filename = $pageTitle.data('filename').replace(/\.[a-z]+$/, '');
+    var namespaces = $pageTitle.data('namespaces') === "true" || $pageTitle.data('namespaces') === true;
     var $currentItem = $('.navigation .item[data-name*="' + filename + '"]:eq(0)');
 
     if ($currentItem.length) {
-        $currentItem
-            .remove()
-            .prependTo('.navigation .list')
-            .show()
-            .find('.itemMembers')
-                .show();
+        if (namespaces) {
+            if (filename.indexOf(".") > 0) {
+                $currentItem
+                    //.remove()
+                    //.prependTo('.navigation .list')
+                    .show()
+                    .addClass("current")
+                    .find('.itemMembers')
+                        .show();
+
+                $currentItem.parent()
+                    .toggle()
+                    .parent()
+                        .addClass("current");
+            }
+            else {
+                // it's in a namespace
+                $currentItem
+                    .addClass("current")
+                    .find("ul")
+                        .show()
+                        .find("ul")
+                            .hide();
+            }
+        }
+        else {
+            $currentItem
+                .remove()
+                .prependTo('.navigation .list')
+                .show()
+                .addClass("current")
+                .find('.itemMembers')
+                    .show();
+        }
     }
 
     // Auto resizing on navigation
@@ -47,7 +86,7 @@ $(function () {
         var height = $(window).height();
         var $el = $('.navigation');
 
-        $el.height(height).find('.list').height(height - 133);
+        $el.height(height).find('.top-list').height(height - 133);
     };
 
     $(window).on('resize', _onResize);
